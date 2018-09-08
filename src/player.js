@@ -15,7 +15,7 @@ class Player {
     let out = this.output
     let fns = []
     let highest = 0
-    phrase.notes.forEach(n => {
+    phrase.forEach(n => {
       let channel = n.channel || 1
       fns.push({
         time: n.time,
@@ -29,7 +29,7 @@ class Player {
       })
     })
     fns.forEach(ev => setTimeout(ev.fn, ev.time))
-    setTimeout(() => out.closePort(), phrase.end + 1000)
+    setTimeout(() => out.closePort(), phrase.end() + 1000)
   }
 }
 

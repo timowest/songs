@@ -4,11 +4,13 @@
   "description": "",
   "main": "src/example.js",
   "scripts": {
-    "example": "node src/example.js"
+    "example": "node src/example.js",
+    "test": "jest"
   },
   "author": "Timo Westkämper",
   "license": "ISC",
   "dependencies": {
+    "jest": "^23.5.0",
     "midi": "^0.9.5",
     "midi-api": "^0.2.0"
   }

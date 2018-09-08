@@ -1,9 +1,6 @@
 const Player = require("./player")
 const phrase = require("./phrase")
-const scale = require("./scale")
-
-// TODO chord from leipzig.chord
-
+const {major} = require("./scale")
 
 // melody 1
 let phrase1 = phrase(
@@ -16,25 +13,23 @@ let phrase1 = phrase(
 
  let melody1 = phrase1.then(phrase2)
      .tempo(90)
-     .where("pitch", scale.major)
+     .where("pitch", major)
      .where("pitch", p => p + 44)
 
 // melody 2
 function arpeggio(start, steps) {
-  let durations = []
   let pitches = []
   for (var i = 0; i < steps; i++) {
-    durations.push(1)
     pitches.push(start + i * 2)  
   }
-  return phrase(durations, pitches)
+  return phrase([1], pitches)
 }
 
 let melody2 = arpeggio(0, 4)
         .then(arpeggio(1, 4))
         .then(arpeggio(2, 4))
         .tempo(120)
-        .where("pitch", scale.major)
+        .where("pitch", major)
         .where("pitch", p => p + 44)
 
 let player = new Player()
