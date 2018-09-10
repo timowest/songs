@@ -6,11 +6,10 @@ describe("scale", () => {
     expect(notes.map(major)).toEqual([0, 2, 4, 5, 7, 9, 11, 12])
   })
 
-  // FIXME
-  /*it("major extended", () => {
+  it("major extended", () => {
     let notes = [2, 3, 4, 5, 6, 7, 8, 9]
     expect(notes.map(major)).toEqual([4, 5, 7, 9, 11, 12, 14, 16])
-  })*/
+  })
 
   it("dorian", () => {
     let notes = [0, 1, 2, 3, 4, 5, 6, 7]

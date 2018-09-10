@@ -6,8 +6,9 @@ function scale(intervals) {
     last += v
   })
   let fn = function(pitch) {
-    let idx = pitch % notes.length
-    return (pitch - idx) * 12/notes.length + notes[idx]
+    let idx = pitch % (notes.length - 1)
+    let base = (pitch - idx) / (notes.length - 1) * 12
+    return base + notes[idx]
   }	
   fn.intervals = intervals
   return fn
