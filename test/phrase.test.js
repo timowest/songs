@@ -18,6 +18,24 @@ describe("phrase", () => {
     ])
   })
 
+  it("string input", () => {
+    expect(phrase("1 2 3 4", "1", "50 70")).toEqual([
+      {duration: 1, pitch: 1, time: 0, velocity: 50},
+      {duration: 2, pitch: 1, time: 1, velocity: 70},
+      {duration: 3, pitch: 1, time: 3, velocity: 50},
+      {duration: 4, pitch: 1, time: 6, velocity: 70}
+    ])
+  })
+
+  it("empty measure", () => {
+    expect(phrase([4], [undefined])).toEqual([
+      {duration: 4, time: 0} 
+    ])
+    expect(phrase("4", ".")).toEqual([
+      {duration: 4, time: 0} 
+    ])
+  })
+
   it("note arrays work", () => {
     expect(phrase([1], [[0, 2, 4], [1, 3, 5], [2, 4, 6]])).toEqual([
       {duration: 1, pitch: 0, time: 0},

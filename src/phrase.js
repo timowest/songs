@@ -1,3 +1,5 @@
+const symbols = require("./symbols")
+
 // {time, pitch, duration, channel}
 
 Array.prototype.tempo = function(bpm) {
@@ -34,22 +36,39 @@ function utter(notes, time, duration, pitch, velocity) {
     pitch.forEach(p => utter(notes, time, duration, p, velocity))
   } else if (typeof pitch === "number") {
     notes.push({time, duration, pitch, velocity})
+  } else {
+    notes.push({time, duration})
   }
   return time + duration
 }
 
+function normalize(v) {
+  if (typeof v === "string") {
+    return v.split(" ").map(vv => {
+      if (vv === ".")
+        return undefined
+      else
+        return symbols[vv] || parseFloat(vv)
+    })
+  }
+  return v || []
+}
+
 // factory method for phrase creation
 function phrase(durations, pitches, velocities) {
+  durations = normalize(durations)
+  pitches = normalize(pitches)
+  velocities = normalize(velocities)
   let max = Math.max(
-    durations ? durations.length : 0,
-    pitches ? pitches.length : 0,
-    velocities ? velocities.length : 0)
+    durations.length,
+    pitches.length,
+    velocities.length)
   let notes = []
   let time = 0
   for (var i = 0; i < max; i++) {
-    let duration = durations && durations[i % durations.length] 
-    let pitch = pitches && pitches[i % pitches.length]
-    let velocity = velocities && velocities[i % velocities.length]
+    let duration = durations[i % durations.length] 
+    let pitch = pitches[i % pitches.length]
+    let velocity = velocities[i % velocities.length]
     time = utter(notes, time, duration, pitch, velocity)
   }
   notes.forEach(n => {

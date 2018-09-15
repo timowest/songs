@@ -4,7 +4,8 @@
   "description": "",
   "main": "src/example.js",
   "scripts": {
-    "example": "node src/example.js",
+    "example": "node src/examples/example.js",
+    "example2": "node src/examples/example2.js",
     "test": "jest"
   },
   "author": "Timo Westkämper",

@@ -15,7 +15,8 @@ class Player {
     let out = this.output
     let fns = []
     let highest = 0
-    phrase.forEach(n => {
+    // skip pauses
+    phrase.filter(n => n.pitch).forEach(n => {
       let channel = n.channel || 1
       fns.push({
         time: n.time,

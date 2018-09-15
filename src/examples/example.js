@@ -1,6 +1,6 @@
-const Player = require("./player")
-const phrase = require("./phrase")
-const {major} = require("./scale")
+const Player = require("../player")
+const phrase = require("../phrase")
+const {major} = require("../scale")
 
 // melody 1
 let phrase1 = phrase(
