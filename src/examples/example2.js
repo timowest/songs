@@ -1,6 +1,7 @@
 const Player = require("../player")
 const phrase = require("../phrase")
 const {major} = require("../scale")
+const {swing} = require("../rhythm")
 
 // Visa från Utanmyra
 // based on https://musescore.com/user/3541/scores/3169751
@@ -71,7 +72,16 @@ function combine(arr) {
   return arr.reduce((acc, [d, n]) => acc.then(phrase(d, n)), [])
 }
 
-let melody = [lhs, rhs].map(combine).reduce((acc, c) => acc.concat(c), [])
+// TODO replace with something more musical
+function longerLouder(note) {
+  let { duration } = note
+  return {...note, velocity: 63 + duration / 4 * 32}
+}
+
+let lhs2 = combine(lhs).map(longerLouder).map(swing(0.6, 0.4))
+let rhs2 = combine(rhs).map(longerLouder).map(swing(0.66, 0.34))
+
+let melody = [lhs2, rhs2].reduce((acc, c) => acc.concat(c), [])
 
 let player = new Player()
 player.openPort(0)
